@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class MazeFrame {
 	private int rowCount;
-	private Location[][] graph;
+	private Button[][] graph;
 
 	private String gameType;
 	private TheGame game;
@@ -17,13 +17,13 @@ public class MazeFrame {
 		rowCount = row;
 		fileName = f;
 		gameType = gt;		
-		graph = new Location[rowCount][rowCount];
+		graph = new Button[rowCount][rowCount];
 
 		pane = new JFrame();
 
 		plot(f);
 
-		State1 state = new State1(graph[0][0].returnNum(), 0, 0,
+		State state = new State(graph[0][0].returnNum(), 0, 0,
 				graph[0][0].getColor(), "s");
 
 		game = new TheGame(this, graph, gameType, state, rowCount);
@@ -41,11 +41,11 @@ public class MazeFrame {
 
 	}
 
-	private void addListen(Location[][] graph) {
+	private void addListen(Button[][] graph) {
 
 		for (int i = 0; i < rowCount; i++) {
 			for (int j = 0; j < rowCount; j++) {
-				Location x = graph[i][j];
+				Button x = graph[i][j];
 
 				ClickListener click = new ClickListener(x, game);
 				x.addActionListener(click);
@@ -57,7 +57,7 @@ public class MazeFrame {
 		pane.setVisible(false);
 	}
 
-	public Container gridPlot(Location[][] graph) {
+	public Container gridPlot(Button[][] graph) {
 		Container ct = new Container();
 		ct.setLayout(new GridLayout(rowCount, rowCount));
 
@@ -96,7 +96,7 @@ public class MazeFrame {
 						c = new Color(106, 213, 249);
 
 					// System.out.println("i :"+ i+" j:  "+j+ c);
-					Location x = new Location(sc.nextInt(), c, i, j, type);
+					Button x = new Button(sc.nextInt(), c, i, j, type);
 
 					/*
 					 * if (i==0 && j==0) x.enableIt(); else x.disableIt();
@@ -104,7 +104,7 @@ public class MazeFrame {
 					graph[i][j] = x;
 					c = Color.BLUE;
 				} else if ((i == graph.length - 1) && (j == graph.length - 1)) {
-					Location s = new Location(0, Color.YELLOW, i, j, "e");
+					Button s = new Button(0, Color.YELLOW, i, j, "e");
 					// s.setEnabled(false);
 					graph[i][j] = s;
 				}

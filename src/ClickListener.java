@@ -3,9 +3,9 @@ import java.awt.event.*;
 public class ClickListener implements  ActionListener {
  
   
-    Location gridPosition;
+    Button gridPosition;
     private TheGame game;
-    public ClickListener(Location l, TheGame g){
+    public ClickListener(Button l, TheGame g){
 		game=g;
 		gridPosition=l;
     }

@@ -6,7 +6,7 @@ public class Solver{
     private int checker=0;
     private int winX;
     private int winY;
-    private  Location[][] graph;
+    private  Button[][] graph;
     private    TheGame g;
     
     private int startX=0;
@@ -14,17 +14,17 @@ public class Solver{
     private boolean found=false;
  
     
-    public Solver(Location[][] r, TheGame ga, int x, int y){
+    public Solver(Button[][] r, TheGame ga, int x, int y){
 	graph=r;
 	g=ga;
 	winX=x-1;
 	winY=y-1;
 	
     }
-    private Vector <State1> solution;
-    public Vector <State1> returnSolution(){
-	solution=new Vector<State1>(0);
-	State1 startState=new State1(graph[startX][startY]);
+    private Vector <State> solution;
+    public Vector <State> returnSolution(){
+	solution=new Vector<State>(0);
+	State startState=new State(graph[startX][startY]);
 	//	solution.add(startState);
 	
 	if (startX==winX && startY==winY) {
@@ -49,7 +49,7 @@ public class Solver{
 
 
 	/////////////////////////////////////////
-    public boolean returnSolution2(State1 state){
+    public boolean returnSolution2(State state){
 	boolean foundIt=false;
 	solution.add(state);
      
@@ -68,7 +68,7 @@ public class Solver{
 
 
 	
-	Vector<Location> l=g.returnTransition(state);
+	Vector<Button> l=g.returnTransition(state);
 	System.out.println("Transitions possible :"+l.capacity());
 	if (l.capacity()==0) {
 	    System.out.println("Capacity =0, return false");
@@ -76,15 +76,15 @@ public class Solver{
 	}
 	for ( int i=0;i<l.capacity();i++){
 	    System.out.println("FOR ERROR RRRRRRRRRRRRRRR+"+i);
-	    Vector <Location> passLocations=state.returnMovesMade();
+	    Vector <Button> passLocations=state.returnMovesMade();
 	    passLocations.add(state);//State is Location ####################
-	    State1 newState=new State1(l.elementAt(i),passLocations);
+	    State newState=new State(l.elementAt(i),passLocations);
 	    System.out.println("new State "+newState.returnX()+","+newState.returnY()+"     "+winX+","+winY+"   "+newState.returnLastX()+"  "+newState.returnLastY());
 	    boolean foundInList=false;
 	    solution.trimToSize();
 	    for (int j=0;j<solution.capacity();j++){
 		//	System.out.println("....."+j);
-		State1 tempState=solution.elementAt(j);
+		State tempState=solution.elementAt(j);
 		
 		
 		if(tempState.returnLastX()==newState.returnLastX() && tempState.returnLastY()==newState.returnLastY() && tempState.returnX()==newState.returnX() && tempState.returnY()==newState.returnY()){

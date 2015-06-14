@@ -2,19 +2,19 @@ import java.util.Vector;
 import java.awt.Color;
 public class Transition2 extends Transition1{
     
-    public Transition2(State1 s, Location[][]g, Location l, MazeFrame f){
+    public Transition2(State s, Button[][]g, Button l, MazeFrame f){
 	super(s,g,l,f);
 	System.out.println("Constructor : state : "+s.returnX()+" "+s.returnY());
     }
 
-    public Vector<Location> returnTransitionS(){
+    public Vector<Button> returnTransitionS(){
 
 	System.out.println("This is transition 2 huhaaa");
-	State1 state=getState();
-	Location[][]graph=getGraph();
-	Vector<Location> movesMade=state.returnMovesMade();
+	State state=getState();
+	Button[][]graph=getGraph();
+	Vector<Button> movesMade=state.returnMovesMade();
 
-	Location lastLocation;
+	Button lastLocation;
 	movesMade.trimToSize();
 
 
@@ -22,13 +22,13 @@ public class Transition2 extends Transition1{
 	    lastLocation=movesMade.elementAt(movesMade.capacity()-2);
 	}
 	else 
-	    lastLocation=new Location(0,Color.RED, 1,1, "m");
+	    lastLocation=new Button(0,Color.RED, 1,1, "m");
 	
 	int size=graph.length;
 	int num=state.returnNum();
 	int i=state.returnX();
 	int j=state.returnY();
-	Vector <Location> transitionS=new Vector <Location>(0);
+	Vector <Button> transitionS=new Vector <Button>(0);
 	int lastI=lastLocation.returnX();
 	int lastJ=lastLocation.returnY();
 	
